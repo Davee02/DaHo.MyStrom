@@ -18,7 +18,7 @@ namespace DaHo.MyStrom.Models
         public long TransitionTime { get; set; }
 
         /// <summary>
-        /// How long in secondswe wait until we start the next request
+        /// How long in seconds we wait until we start the next request
         /// If you do not want to interrupt the color ramp up, this time has to be bigger or equal than the <see cref="TransitionTime"/> value i.e. bigger or equal than <see cref="TransitionTime"/>/1000
         /// </summary>
         [JsonProperty("time")]

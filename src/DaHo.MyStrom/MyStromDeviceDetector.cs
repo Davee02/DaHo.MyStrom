@@ -1,4 +1,5 @@
-﻿using DaHo.MyStrom.Models;
+﻿using DaHo.MyStrom.Abstractions;
+using DaHo.MyStrom.Models;
 using DaHo.MyStrom.Models.Enums;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace DaHo.MyStrom
 {
-    public class MyStromDeviceDetector
+    public class MyStromDeviceDetector : IMyStromDeviceDetector
     {
         private CancellationToken _cancellationToken;
 
