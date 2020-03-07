@@ -20,8 +20,7 @@ namespace DaHo.MyStrom
         /// <inheritdoc/>
         public async Task SetButtonActionsAsync(ButtonActionType actionType, IEnumerable<ButtonAction> actions)
         {
-            var typeString = actionType.GetAttributeFromEnum<EnumMemberAttribute>().Value;
-            var actionString = actions.Select(x => x.ToString()).Aggregate((x, y) => $"{x}||{y}");
+            (var typeString, var actionString) = GetButtonActionStrings(actionType, actions);
 
             if (actionString.Length >= 800)
                 throw new ArgumentException($"The length of the action has to be smaller than 800 characters. Actual length: {actionString.Length}");
@@ -32,14 +31,14 @@ namespace DaHo.MyStrom
         /// <inheritdoc/>
         public void SetButtonActions(ButtonActionType actionType, IEnumerable<ButtonAction> actions)
         {
-            var typeString = actionType.GetAttributeFromEnum<EnumMemberAttribute>().Value;
-            var actionString = actions.Select(x => x.ToString()).Aggregate((x, y) => $"{x}||{y}");
+            (var typeString, var actionString) = GetButtonActionStrings(actionType, actions);
 
             if (actionString.Length >= 800)
                 throw new ArgumentException($"The length of the action has to be smaller than 800 characters. Actual length: {actionString.Length}");
 
             PostRaw($"api/v1/action/{typeString}", new StringContent(actionString));
         }
+
 
         /// <inheritdoc/>
         public async Task<ButtonInfo> GetButtonInfoAsync()
@@ -69,6 +68,11 @@ namespace DaHo.MyStrom
             var raw = Get<IDictionary<string, string>>($"api/v1/action/{typeString}");
 
             return ButtonAction.FromString(raw["url"]);
+        }
+
+        private (string type, string action) GetButtonActionStrings(ButtonActionType actionType, IEnumerable<ButtonAction> actions)
+        {
+            return (actionType.GetAttributeFromEnum<EnumMemberAttribute>().Value, actions.Select(x => x.ToString()).Aggregate((x, y) => $"{x}||{y}"));
         }
     }
 }

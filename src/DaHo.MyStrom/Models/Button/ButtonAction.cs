@@ -14,7 +14,6 @@ namespace DaHo.MyStrom.Models
 
         public string RequestData { get; set; }
 
-
         public override string ToString()
         {
             var typeString = RequestType.GetAttributeFromEnum<EnumMemberAttribute>().Value;

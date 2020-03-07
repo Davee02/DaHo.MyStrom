@@ -6,9 +6,9 @@ using DaHo.MyStrom.Models;
 
 namespace DaHo.MyStrom
 {
-    public class MyStromStripApi : GeneralMyStromApi, IMyStromLedStripApi
+    public class MyStromLedStripApi : GeneralMyStromApi, IMyStromLedStripApi
     {
-        public MyStromStripApi(string myStromDeviceAddress, HttpMessageHandler handler = null)
+        public MyStromLedStripApi(string myStromDeviceAddress, HttpMessageHandler handler = null)
             : base(myStromDeviceAddress, handler)
         { }
 
